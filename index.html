@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Pedro & Manu</title>
+  <title>Fideprota & Manu</title>
   <style>
     body {
       background-color: #1e2632;
@@ -19,6 +19,8 @@
     }
 
     .rosa {
+      width: 100px;
+      height: auto;
       transition: transform 0.5s ease;
       margin: 30px auto;
     }
@@ -40,6 +42,7 @@
       display: flex;
       justify-content: center;
       gap: 15px;
+      flex-wrap: wrap;
     }
 
     .tempo div {
@@ -63,29 +66,17 @@
 </head>
 <body>
 
-  <div class="mensagem">💖 Eu te amoooo muitoooo minhaaaaa princesaaaaaa. 💖</div>
+  <div class="mensagem">💖 Te amo muitooo minhaaaaa princesaaaaaaa. 💖</div>
 
   <img id="rosa" src="https://em-content.zobj.net/thumbs/120/microsoft/319/rose_1f339.png" alt="Rosa" class="rosa">
 
   <div class="contador">
     <h3>Tempo de Namoro</h3>
     <div class="tempo">
-      <div>
-        <span id="anos">0</span>
-        <small>Anos</small>
-      </div>
-      <div>
-        <span id="meses">0</span>
-        <small>Meses</small>
-      </div>
-      <div>
-        <span id="dias">0</span>
-        <small>Dias</small>
-      </div>
-      <div>
-        <span id="horas">0</span>
-        <small>Horas</small>
-      </div>
+      <div><span id="anos">0</span><small>Anos</small></div>
+      <div><span id="meses">0</span><small>Meses</small></div>
+      <div><span id="dias">0</span><small>Dias</small></div>
+      <div><span id="horas">0</span><small>Horas</small></div>
     </div>
   </div>
 
@@ -96,29 +87,29 @@
       const agora = new Date();
       let diff = agora - inicio;
 
-      const msPorHora = 1000 * 60 * 60;
-      const msPorDia = msPorHora * 24;
-      const msPorMes = msPorDia * 30.44;
-      const msPorAno = msPorDia * 365.25;
+      const segundos = Math.floor(diff / 1000);
+      const minutos = Math.floor(segundos / 60);
+      const horas = Math.floor(minutos / 60);
+      const diasTotais = Math.floor(horas / 24);
 
-      const anos = Math.floor(diff / msPorAno);
-      const meses = Math.floor((diff % msPorAno) / msPorMes);
-      const dias = Math.floor((diff % msPorMes) / msPorDia);
-      const horas = Math.floor((diff % msPorDia) / msPorHora);
+      const anos = Math.floor(diasTotais / 365);
+      const meses = Math.floor((diasTotais % 365) / 30);
+      const dias = (diasTotais % 365) % 30;
+      const horaAtual = agora.getHours();
 
-      document.getElementById('anos').textContent = anos;
-      document.getElementById('meses').textContent = meses;
-      document.getElementById('dias').textContent = dias;
-      document.getElementById('horas').textContent = horas;
+      document.getElementById("anos").textContent = anos;
+      document.getElementById("meses").textContent = meses;
+      document.getElementById("dias").textContent = dias;
+      document.getElementById("horas").textContent = horaAtual;
 
-      // Crescimento da rosa com base nos dias
-      const totalDias = Math.floor(diff / msPorDia);
-      const escala = 1 + (totalDias * 0.02); // cresce 2% por dia
-      document.getElementById('rosa').style.transform = `scale(${escala})`;
+      // Escala da rosa
+      const escala = 1 + (diasTotais * 0.01); // cresce 1% por dia
+      const rosa = document.getElementById("rosa");
+      rosa.style.transform = `scale(${escala})`;
     }
 
-    setInterval(atualizarContador, 1000);
     atualizarContador();
+    setInterval(atualizarContador, 1000 * 60 * 10); // atualiza a cada 10 min
   </script>
 
 </body>
