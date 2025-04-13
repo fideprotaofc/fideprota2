@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pedro & Manu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5 Meses de Amor</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     #flor {
-      transition: all 1s ease-in-out;
       object-fit: contain;
-      width: 40px;
-      height: 40px;
+      position: absolute;
+      bottom: 10px;
+      transition: all 1s ease-in-out;
+      width: 60px;
+      height: 60px;
+    }
+
+    .flor-grande {
+      width: 150px !important;
+      height: 150px !important;
     }
 
     .heart {
@@ -33,109 +40,73 @@
         opacity: 0;
       }
     }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .animate-bounce-in {
+      animation: bounceIn 0.5s ease-out;
+    }
   </style>
 </head>
-<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen overflow-hidden">
-  <div class="w-full max-w-md p-4 z-10">
-    <h1 class="text-center text-pink-500 text-2xl font-bold mb-4">Pedro & Manu</h1>
+<body class="bg-black text-white flex items-center justify-center min-h-screen flex-col">
 
-    <div class="bg-gray-800 p-4 rounded-lg mb-4">
-      <p class="text-center text-gray-300">A rosa cresce todo dia como nosso amor</p>
-    </div>
-
-    <div class="bg-gray-800 p-4 rounded-lg mb-4 flex flex-col items-center">
-      <img id="flor" src="flor.png" alt="Flor" class="mb-4" />
-      <div class="flex justify-between w-full px-2">
-        <i class="fas fa-envelope text-pink-500"></i>
-        <i id="playBtn" class="fas fa-play-circle text-pink-500 cursor-pointer text-2xl"></i>
-      </div>
-    </div>
-
-    <div class="bg-gray-800 p-4 rounded-lg">
-      <h2 class="text-center text-pink-500 text-lg font-bold mb-4">Tempo que eu conheço essa Menina Incrivel:/h2>
-      <div class="grid grid-cols-5 gap-4 text-center" id="tempo">
-        <div><p class="text-2xl font-bold" id="anos">0</p><p class="text-gray-300">Anos</p></div>
-        <div><p class="text-2xl font-bold" id="meses">0</p><p class="text-gray-300">Meses</p></div>
-        <div><p class="text-2xl font-bold" id="dias">0</p><p class="text-gray-300">Dias</p></div>
-        <div><p class="text-2xl font-bold" id="horas">0</p><p class="text-gray-300">Horas</p></div>
-        <div><p class="text-2xl font-bold" id="segundos">0</p><p class="text-gray-300">Segundos</p></div>
-      </div>
-    </div>
-
-    <div class="mt-6 text-center">
-      <p class="text-pink-400 text-lg animate-pulse font-semibold">
-        EUUU TEEE AMOOOOOOOOOO MUITOOOOOOOOO MINHAAAAAA PRINCESINHAAAAAAA LINDAAAAAAAAA 💗👑
-      </p>
+  <div class="bg-gray-800 p-4 rounded-lg mb-4 flex flex-col items-center relative h-44 w-80">
+    <img id="flor" src="flor.png" alt="Flor" />
+    <div class="absolute top-2 right-2">
+      <i class="fas fa-envelope text-pink-500"></i>
+      <i id="playBtn" class="fas fa-play-circle text-pink-500 cursor-pointer text-2xl ml-2"></i>
     </div>
   </div>
 
-  <!-- Corações -->
-  <div id="coroes-container"></div>
+  <!-- Modal personalizado -->
+  <div id="customModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+    <div class="bg-gray-800 p-6 rounded-2xl shadow-xl text-center w-80 animate-bounce-in">
+      <h3 class="text-pink-400 text-xl font-bold mb-2">🌸 Amor em Flor 🌸</h3>
+      <p id="modalMessage" class="text-gray-300 mb-4">Estamos juntos há X meses!</p>
+      <button onclick="fecharModal()" class="mt-2 bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition">Fechar</button>
+    </div>
+  </div>
 
   <script>
-    const dataInicio = new Date("2024-10-26T00:00:00");
-    const flor = document.getElementById("flor");
     const playBtn = document.getElementById("playBtn");
+    const flor = document.getElementById("flor");
 
-    function calcularTempoPrecisamente(data1, data2) {
-      let anos = data2.getFullYear() - data1.getFullYear();
-      let meses = data2.getMonth() - data1.getMonth();
-      let dias = data2.getDate() - data1.getDate();
-
-      if (dias < 0) {
-        meses--;
-        const ultimoDiaMesAnterior = new Date(data2.getFullYear(), data2.getMonth(), 0).getDate();
-        dias += ultimoDiaMesAnterior;
-      }
-
-      if (meses < 0) {
-        anos--;
-        meses += 12;
-      }
-
-      return { anos, meses, dias };
-    }
+    const dataInicio = new Date("2024-10-26");
 
     function atualizarTempo() {
-      const agora = new Date();
-      const { anos, meses, dias } = calcularTempoPrecisamente(dataInicio, agora);
-      const horas = agora.getHours();
-      const segundos = agora.getSeconds();
-
-      document.getElementById("anos").innerText = anos;
-      document.getElementById("meses").innerText = meses;
-      document.getElementById("dias").innerText = dias;
-      document.getElementById("horas").innerText = horas;
-      document.getElementById("segundos").innerText = segundos;
-
-      return { anos, meses };
+      const hoje = new Date();
+      const diffMeses = (hoje.getFullYear() - dataInicio.getFullYear()) * 12 + hoje.getMonth() - dataInicio.getMonth();
+      return { meses: diffMeses };
     }
-
-    function criarCoracao() {
-      const coracao = document.createElement("div");
-      coracao.classList.add("heart");
-      coracao.innerHTML = "❤️";
-      coracao.style.left = `${Math.random() * 100}vw`;
-      coracao.style.fontSize = `${8 + Math.random() * 8}px`;
-      document.body.appendChild(coracao);
-      setTimeout(() => coracao.remove(), 5000);
-    }
-
-    setInterval(atualizarTempo, 1000);
-    setInterval(criarCoracao, 300);
 
     playBtn.addEventListener("click", () => {
       const { meses } = atualizarTempo();
 
-      // Crescer a flor suavemente
-      flor.style.width = "150px";
-      flor.style.height = "150px";
+      // Crescer a flor
+      flor.classList.add("flor-grande");
 
-      // Exibir mensagem
+      // Mostrar modal
       setTimeout(() => {
-        alert(`Estamos juntos há ${meses} meses! 🌸`);
-      }, 500);
+        document.getElementById("modalMessage").innerText = `Estamos juntos há ${meses} meses! 🌸`;
+        document.getElementById("customModal").classList.remove("hidden");
+      }, 1000);
     });
+
+    function fecharModal() {
+      document.getElementById("customModal").classList.add("hidden");
+    }
   </script>
 </body>
 </html>
