@@ -9,8 +9,8 @@
   <style>
     #flor {
       transition: all 0.5s ease-in-out;
-      object-fit: contain; /* Mantém a proporção da imagem */
-      animation: moveFlor 3s ease-in-out infinite; /* Adicionando a animação */
+      object-fit: contain;
+      animation: moveFlor 3s ease-in-out infinite;
     }
 
     @keyframes moveFlor {
@@ -18,10 +18,10 @@
         transform: translateX(0);
       }
       50% {
-        transform: translateX(10px); /* Move para a direita */
+        transform: translateX(10px);
       }
       100% {
-        transform: translateX(0); /* Volta para a posição original */
+        transform: translateX(0);
       }
     }
   </style>
@@ -37,9 +37,7 @@
     </div>
 
     <div class="bg-gray-800 p-4 rounded-lg mb-4 flex flex-col items-center">
-      <!-- 🌸 AQUI está a imagem da flor -->
       <img id="flor" src="flor.png" alt="Flor" style="width: 50px; height: 50px;" class="mb-4" />
-      
       <div class="flex justify-between w-full px-2">
         <i class="fas fa-envelope text-pink-500"></i>
         <i class="fas fa-play-circle text-pink-500"></i>
@@ -77,28 +75,41 @@
     const dataInicio = new Date("2024-10-26T00:00:00");
     const flor = document.getElementById("flor");
 
+    function calcularTempoPrecisamente(data1, data2) {
+      let anos = data2.getFullYear() - data1.getFullYear();
+      let meses = data2.getMonth() - data1.getMonth();
+      let dias = data2.getDate() - data1.getDate();
+
+      if (dias < 0) {
+        meses--;
+        const ultimoDiaDoMesAnterior = new Date(data2.getFullYear(), data2.getMonth(), 0).getDate();
+        dias += ultimoDiaDoMesAnterior;
+      }
+
+      if (meses < 0) {
+        anos--;
+        meses += 12;
+      }
+
+      return { anos, meses, dias };
+    }
+
     function atualizarTempo() {
       const agora = new Date();
-      const diferenca = agora - dataInicio;
-
-      const segundosTotais = Math.floor(diferenca / 1000);
-      const diasTotais = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-
-      const anos = agora.getFullYear() - dataInicio.getFullYear();
-      const meses = agora.getMonth() - dataInicio.getMonth() + (anos * 12);
-      const dias = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+      const { anos, meses, dias } = calcularTempoPrecisamente(dataInicio, agora);
       const horas = agora.getHours();
       const segundos = agora.getSeconds();
 
-      document.getElementById("anos").innerText = Math.floor(meses / 12);
-      document.getElementById("meses").innerText = meses % 12;
+      document.getElementById("anos").innerText = anos;
+      document.getElementById("meses").innerText = meses;
       document.getElementById("dias").innerText = dias;
       document.getElementById("horas").innerText = horas;
       document.getElementById("segundos").innerText = segundos;
 
-      // Ajustar o tamanho da flor para crescer suavemente
-      const maxSize = 200; // Tamanho máximo da flor
-      const newSize = Math.min(50 + diasTotais * 2, maxSize); // Garantir que o tamanho não ultrapasse o limite
+      // Crescimento da flor
+      const diasTotais = Math.floor((agora - dataInicio) / (1000 * 60 * 60 * 24));
+      const maxSize = 200;
+      const newSize = Math.min(50 + diasTotais * 2, maxSize);
       flor.style.width = `${newSize}px`;
       flor.style.height = `${newSize}px`;
     }
