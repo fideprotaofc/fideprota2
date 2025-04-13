@@ -33,7 +33,7 @@
     </h1>
 
     <div class="bg-gray-800 p-4 rounded-lg mb-4">
-      <p class="text-center text-gray-300">"A rosa cresce todo dia como nosso amor, Manu."</p>
+      <p class="text-center text-gray-300">"A rosa cresce todo dia como nosso amor"</p>
     </div>
 
     <div class="bg-gray-800 p-4 rounded-lg mb-4 flex flex-col items-center">
@@ -68,6 +68,13 @@
           <p class="text-gray-300">Segundos</p>
         </div>
       </div>
+    </div>
+
+    <!-- Mensagem fofa -->
+    <div class="mt-6 text-center">
+      <p class="text-pink-400 text-lg animate-pulse font-semibold">
+        eu te amooooo muitooooo minhaaaaa princesaaaaa 💗👑
+      </p>
     </div>
   </div>
 
@@ -106,7 +113,6 @@
       document.getElementById("horas").innerText = horas;
       document.getElementById("segundos").innerText = segundos;
 
-      // Crescimento da flor
       const diasTotais = Math.floor((agora - dataInicio) / (1000 * 60 * 60 * 24));
       const maxSize = 200;
       const newSize = Math.min(50 + diasTotais * 2, maxSize);
