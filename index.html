@@ -9,6 +9,7 @@
   <style>
     #flor {
       transition: all 0.5s ease-in-out;
+      object-fit: contain; /* Mantém a proporção da imagem */
     }
   </style>
 </head>
@@ -82,9 +83,9 @@
       document.getElementById("horas").innerText = horas;
       document.getElementById("segundos").innerText = segundos;
 
-      // Faz a imagem da flor crescer com o tempo
-      const maxSize = 200;
-      const newSize = Math.min(50 + diasTotais * 2, maxSize);
+      // Ajustar o tamanho da flor para crescer suavemente
+      const maxSize = 200; // Tamanho máximo da flor
+      const newSize = Math.min(50 + diasTotais * 2, maxSize); // Garantir que o tamanho não ultrapasse o limite
       flor.style.width = `${newSize}px`;
       flor.style.height = `${newSize}px`;
     }
