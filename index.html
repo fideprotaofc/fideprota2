@@ -10,6 +10,19 @@
     #flor {
       transition: all 0.5s ease-in-out;
       object-fit: contain; /* Mantém a proporção da imagem */
+      animation: moveFlor 3s ease-in-out infinite; /* Adicionando a animação */
+    }
+
+    @keyframes moveFlor {
+      0% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(10px); /* Move para a direita */
+      }
+      100% {
+        transform: translateX(0); /* Volta para a posição original */
+      }
     }
   </style>
 </head>
