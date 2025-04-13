@@ -8,15 +8,10 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
     #flor {
-      transition: all 0.5s ease-in-out;
+      transition: all 1s ease-in-out;
       object-fit: contain;
-      animation: moveFlor 3s ease-in-out infinite;
-    }
-
-    @keyframes moveFlor {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(10px); }
-      100% { transform: translateX(0); }
+      width: 40px;
+      height: 40px;
     }
 
     .heart {
@@ -49,15 +44,15 @@
     </div>
 
     <div class="bg-gray-800 p-4 rounded-lg mb-4 flex flex-col items-center">
-      <img id="flor" src="flor.png" alt="Flor" style="width: 50px; height: 50px;" class="mb-4" />
+      <img id="flor" src="flor.png" alt="Flor" class="mb-4" />
       <div class="flex justify-between w-full px-2">
         <i class="fas fa-envelope text-pink-500"></i>
-        <i class="fas fa-play-circle text-pink-500"></i>
+        <i id="playBtn" class="fas fa-play-circle text-pink-500 cursor-pointer text-2xl"></i>
       </div>
     </div>
 
     <div class="bg-gray-800 p-4 rounded-lg">
-      <h2 class="text-center text-pink-500 text-lg font-bold mb-4">Tempo que conheço essa Menina Incrivel:</h2>
+      <h2 class="text-center text-pink-500 text-lg font-bold mb-4">Tempo que eu conheço essa Menina Incrivel:/h2>
       <div class="grid grid-cols-5 gap-4 text-center" id="tempo">
         <div><p class="text-2xl font-bold" id="anos">0</p><p class="text-gray-300">Anos</p></div>
         <div><p class="text-2xl font-bold" id="meses">0</p><p class="text-gray-300">Meses</p></div>
@@ -69,17 +64,18 @@
 
     <div class="mt-6 text-center">
       <p class="text-pink-400 text-lg animate-pulse font-semibold">
-        EU TE AMOOO MUITOOOO MINHAAAA PRINCESAAAA 💗👑
+        EUUU TEEE AMOOOOOOOOOO MUITOOOOOOOOO MINHAAAAAA PRINCESINHAAAAAAA LINDAAAAAAAAA 💗👑
       </p>
     </div>
   </div>
 
-  <!-- Container invisível para corações -->
+  <!-- Corações -->
   <div id="coroes-container"></div>
 
   <script>
     const dataInicio = new Date("2024-10-26T00:00:00");
     const flor = document.getElementById("flor");
+    const playBtn = document.getElementById("playBtn");
 
     function calcularTempoPrecisamente(data1, data2) {
       let anos = data2.getFullYear() - data1.getFullYear();
@@ -112,11 +108,7 @@
       document.getElementById("horas").innerText = horas;
       document.getElementById("segundos").innerText = segundos;
 
-      const diasTotais = Math.floor((agora - dataInicio) / (1000 * 60 * 60 * 24));
-      const maxSize = 200;
-      const newSize = Math.min(50 + diasTotais * 2, maxSize);
-      flor.style.width = `${newSize}px`;
-      flor.style.height = `${newSize}px`;
+      return { anos, meses };
     }
 
     function criarCoracao() {
@@ -126,13 +118,24 @@
       coracao.style.left = `${Math.random() * 100}vw`;
       coracao.style.fontSize = `${8 + Math.random() * 8}px`;
       document.body.appendChild(coracao);
-
       setTimeout(() => coracao.remove(), 5000);
     }
 
     setInterval(atualizarTempo, 1000);
-    atualizarTempo();
     setInterval(criarCoracao, 300);
+
+    playBtn.addEventListener("click", () => {
+      const { meses } = atualizarTempo();
+
+      // Crescer a flor suavemente
+      flor.style.width = "150px";
+      flor.style.height = "150px";
+
+      // Exibir mensagem
+      setTimeout(() => {
+        alert(`Estamos juntos há ${meses} meses! 🌸`);
+      }, 500);
+    });
   </script>
 </body>
 </html>
