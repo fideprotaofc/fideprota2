@@ -7,9 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
-    .flor {
-      border-radius: 50%;
-      background-color: #ec4899;
+    #flor {
       transition: all 0.5s ease-in-out;
     }
   </style>
@@ -25,7 +23,9 @@
     </div>
 
     <div class="bg-gray-800 p-4 rounded-lg mb-4 flex flex-col items-center">
-      <div id="flor" class="flor mb-4" style="width: 50px; height: 50px;"></div>
+      <!-- 🌸 AQUI está a imagem da flor -->
+      <img id="flor" src="flor.png" alt="Flor" style="width: 50px; height: 50px;" class="mb-4" />
+      
       <div class="flex justify-between w-full px-2">
         <i class="fas fa-envelope text-pink-500"></i>
         <i class="fas fa-play-circle text-pink-500"></i>
@@ -59,7 +59,6 @@
     </div>
   </div>
 
-  
   <script>
     const dataInicio = new Date("2024-10-26T00:00:00");
     const flor = document.getElementById("flor");
@@ -83,6 +82,7 @@
       document.getElementById("horas").innerText = horas;
       document.getElementById("segundos").innerText = segundos;
 
+      // Faz a imagem da flor crescer com o tempo
       const maxSize = 200;
       const newSize = Math.min(50 + diasTotais * 2, maxSize);
       flor.style.width = `${newSize}px`;
