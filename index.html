@@ -2,28 +2,31 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pedro & Manu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <title>Pedro & Manu</title>
   <style>
-    .rose {
-      background-color: #ec4899;
+    .flor {
       border-radius: 50%;
-      transition: all 1s ease;
+      background-color: #ec4899;
+      transition: all 0.5s ease-in-out;
     }
   </style>
 </head>
 <body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
   <div class="w-full max-w-md p-4">
-    <h1 class="text-center text-pink-500 text-2xl font-bold mb-4">Pedro & Manu</h1>
+    <h1 class="text-center text-pink-500 text-2xl font-bold mb-4">
+      Pedro & Manu
+    </h1>
 
     <div class="bg-gray-800 p-4 rounded-lg mb-4">
       <p class="text-center text-gray-300">"A rosa cresce todo dia como nosso amor, Manu."</p>
     </div>
 
     <div class="bg-gray-800 p-4 rounded-lg mb-4 flex flex-col items-center">
-      <div id="rose" class="rose mb-4" style="width: 50px; height: 50px;"></div>
-      <div class="flex justify-between w-full px-4">
+      <div id="flor" class="flor mb-4" style="width: 50px; height: 50px;"></div>
+      <div class="flex justify-between w-full px-2">
         <i class="fas fa-envelope text-pink-500"></i>
         <i class="fas fa-play-circle text-pink-500"></i>
       </div>
@@ -31,25 +34,25 @@
 
     <div class="bg-gray-800 p-4 rounded-lg">
       <h2 class="text-center text-pink-500 text-lg font-bold mb-4">Tempo de Namoro</h2>
-      <div class="grid grid-cols-5 gap-4 text-center">
+      <div class="grid grid-cols-5 gap-4 text-center" id="tempo">
         <div>
-          <p id="anos" class="text-2xl font-bold">0</p>
+          <p class="text-2xl font-bold" id="anos">0</p>
           <p class="text-gray-300">Anos</p>
         </div>
         <div>
-          <p id="meses" class="text-2xl font-bold">0</p>
+          <p class="text-2xl font-bold" id="meses">0</p>
           <p class="text-gray-300">Meses</p>
         </div>
         <div>
-          <p id="dias" class="text-2xl font-bold">0</p>
+          <p class="text-2xl font-bold" id="dias">0</p>
           <p class="text-gray-300">Dias</p>
         </div>
         <div>
-          <p id="horas" class="text-2xl font-bold">0</p>
+          <p class="text-2xl font-bold" id="horas">0</p>
           <p class="text-gray-300">Horas</p>
         </div>
         <div>
-          <p id="segundos" class="text-2xl font-bold">0</p>
+          <p class="text-2xl font-bold" id="segundos">0</p>
           <p class="text-gray-300">Segundos</p>
         </div>
       </div>
@@ -57,36 +60,36 @@
   </div>
 
   <script>
-    const startDate = new Date("2024-10-26T00:00:00");
-    const rose = document.getElementById("rose");
+    const dataInicio = new Date("2024-10-26T00:00:00");
+    const flor = document.getElementById("flor");
 
-    function updateTime() {
-      const now = new Date();
-      const diff = now - startDate;
+    function atualizarTempo() {
+      const agora = new Date();
+      const diferenca = agora - dataInicio;
 
-      const segundos = Math.floor(diff / 1000) % 60;
-      const minutos = Math.floor(diff / 1000 / 60) % 60;
-      const horas = Math.floor(diff / 1000 / 60 / 60) % 24;
-      const diasTotais = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const segundosTotais = Math.floor(diferenca / 1000);
+      const diasTotais = Math.floor(diferenca / (1000 * 60 * 60 * 24));
 
-      const anos = Math.floor(diasTotais / 365);
-      const meses = Math.floor((diasTotais % 365) / 30);
-      const dias = (diasTotais % 365) % 30;
+      const anos = agora.getFullYear() - dataInicio.getFullYear();
+      const meses = agora.getMonth() - dataInicio.getMonth() + (anos * 12);
+      const dias = Math.floor((diferenca % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+      const horas = agora.getHours();
+      const segundos = agora.getSeconds();
 
-      document.getElementById("anos").textContent = anos;
-      document.getElementById("meses").textContent = meses;
-      document.getElementById("dias").textContent = dias;
-      document.getElementById("horas").textContent = horas;
-      document.getElementById("segundos").textContent = segundos;
+      document.getElementById("anos").innerText = Math.floor(meses / 12);
+      document.getElementById("meses").innerText = meses % 12;
+      document.getElementById("dias").innerText = dias;
+      document.getElementById("horas").innerText = horas;
+      document.getElementById("segundos").innerText = segundos;
 
-      // Faz a rosa crescer com o tempo
-      const newSize = 50 + diasTotais * 2;
-      rose.style.width = `${newSize}px`;
-      rose.style.height = `${newSize}px`;
+      const maxSize = 200;
+      const newSize = Math.min(50 + diasTotais * 2, maxSize);
+      flor.style.width = `${newSize}px`;
+      flor.style.height = `${newSize}px`;
     }
 
-    updateTime();
-    setInterval(updateTime, 1000);
+    atualizarTempo();
+    setInterval(atualizarTempo, 1000);
   </script>
 </body>
 </html>
