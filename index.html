@@ -14,26 +14,38 @@
     }
 
     @keyframes moveFlor {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(10px); }
+      100% { transform: translateX(0); }
+    }
+
+    .heart {
+      position: fixed;
+      color: #ff69b4;
+      font-size: 12px;
+      animation: fall 5s linear forwards;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    @keyframes fall {
       0% {
-        transform: translateX(0);
-      }
-      50% {
-        transform: translateX(10px);
+        transform: translateY(-10px) scale(1);
+        opacity: 1;
       }
       100% {
-        transform: translateX(0);
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
       }
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
-  <div class="w-full max-w-md p-4">
-    <h1 class="text-center text-pink-500 text-2xl font-bold mb-4">
-      Pedro & Manu
-    </h1>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen overflow-hidden">
+  <div class="w-full max-w-md p-4 z-10">
+    <h1 class="text-center text-pink-500 text-2xl font-bold mb-4">Pedro & Manu</h1>
 
     <div class="bg-gray-800 p-4 rounded-lg mb-4">
-      <p class="text-center text-gray-300">"A rosa cresce todo dia como nosso amor"</p>
+      <p class="text-center text-gray-300">A rosa cresce todo dia como nosso amor</p>
     </div>
 
     <div class="bg-gray-800 p-4 rounded-lg mb-4 flex flex-col items-center">
@@ -45,38 +57,25 @@
     </div>
 
     <div class="bg-gray-800 p-4 rounded-lg">
-      <h2 class="text-center text-pink-500 text-lg font-bold mb-4">Tempo que eu conheço essa Menina Perfeita</h2>
+      <h2 class="text-center text-pink-500 text-lg font-bold mb-4">Tempo que conheço essa Menina Incrivel:</h2>
       <div class="grid grid-cols-5 gap-4 text-center" id="tempo">
-        <div>
-          <p class="text-2xl font-bold" id="anos">0</p>
-          <p class="text-gray-300">Anos</p>
-        </div>
-        <div>
-          <p class="text-2xl font-bold" id="meses">0</p>
-          <p class="text-gray-300">Meses</p>
-        </div>
-        <div>
-          <p class="text-2xl font-bold" id="dias">0</p>
-          <p class="text-gray-300">Dias</p>
-        </div>
-        <div>
-          <p class="text-2xl font-bold" id="horas">0</p>
-          <p class="text-gray-300">Horas</p>
-        </div>
-        <div>
-          <p class="text-2xl font-bold" id="segundos">0</p>
-          <p class="text-gray-300">Segundos</p>
-        </div>
+        <div><p class="text-2xl font-bold" id="anos">0</p><p class="text-gray-300">Anos</p></div>
+        <div><p class="text-2xl font-bold" id="meses">0</p><p class="text-gray-300">Meses</p></div>
+        <div><p class="text-2xl font-bold" id="dias">0</p><p class="text-gray-300">Dias</p></div>
+        <div><p class="text-2xl font-bold" id="horas">0</p><p class="text-gray-300">Horas</p></div>
+        <div><p class="text-2xl font-bold" id="segundos">0</p><p class="text-gray-300">Segundos</p></div>
       </div>
     </div>
 
-    <!-- Mensagem fofa -->
     <div class="mt-6 text-center">
       <p class="text-pink-400 text-lg animate-pulse font-semibold">
-        EU TE AMOOO MUITOOO MINHAAA PRINCESAAA 💗👑
+        EU TE AMOOO MUITOOOO MINHAAAA PRINCESAAAA 💗👑
       </p>
     </div>
   </div>
+
+  <!-- Container invisível para corações -->
+  <div id="coroes-container"></div>
 
   <script>
     const dataInicio = new Date("2024-10-26T00:00:00");
@@ -89,8 +88,8 @@
 
       if (dias < 0) {
         meses--;
-        const ultimoDiaDoMesAnterior = new Date(data2.getFullYear(), data2.getMonth(), 0).getDate();
-        dias += ultimoDiaDoMesAnterior;
+        const ultimoDiaMesAnterior = new Date(data2.getFullYear(), data2.getMonth(), 0).getDate();
+        dias += ultimoDiaMesAnterior;
       }
 
       if (meses < 0) {
@@ -120,8 +119,20 @@
       flor.style.height = `${newSize}px`;
     }
 
-    atualizarTempo();
+    function criarCoracao() {
+      const coracao = document.createElement("div");
+      coracao.classList.add("heart");
+      coracao.innerHTML = "❤️";
+      coracao.style.left = `${Math.random() * 100}vw`;
+      coracao.style.fontSize = `${8 + Math.random() * 8}px`;
+      document.body.appendChild(coracao);
+
+      setTimeout(() => coracao.remove(), 5000);
+    }
+
     setInterval(atualizarTempo, 1000);
+    atualizarTempo();
+    setInterval(criarCoracao, 300);
   </script>
 </body>
 </html>
