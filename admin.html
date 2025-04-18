@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - FIDEPROTA STORE</title>
+  <style>
+    body { font-family: sans-serif; background: #1e1e2e; color: white; padding: 2rem; }
+    input, textarea, button { display: block; margin-top: 10px; padding: 10px; width: 100%; max-width: 400px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Admin - FIDEPROTA STORE</h1>
+  <div id="login">
+    <input type="password" id="senha" placeholder="Digite a senha de admin">
+    <button onclick="verificarSenha()">Entrar</button>
+  </div>
+
+  <div id="painel" class="hidden">
+    <h2>Adicionar Produto</h2>
+    <input id="nome" placeholder="Nome do produto">
+    <input id="imagem" placeholder="URL da imagem">
+    <textarea id="descricao" placeholder="Descrição"></textarea>
+    <button onclick="salvarProduto()">Salvar Produto</button>
+  </div>
+
+  <script>
+    const SENHA = 'fideprota123';
+
+    function verificarSenha() {
+      const input = document.getElementById('senha').value;
+      if (input === SENHA) {
+        document.getElementById('login').classList.add('hidden');
+        document.getElementById('painel').classList.remove('hidden');
+      } else {
+        alert('Senha incorreta!');
+      }
+    }
+
+    function salvarProduto() {
+      const nome = document.getElementById('nome').value;
+      const imagem = document.getElementById('imagem').value;
+      const descricao = document.getElementById('descricao').value;
+
+      const novo = { nome, imagem, descricao };
+      const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+      produtos.push(novo);
+      localStorage.setItem('produtos', JSON.stringify(produtos));
+      alert('Produto adicionado!');
+    }
+  </script>
+</body>
+</html>
