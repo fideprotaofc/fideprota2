@@ -20,8 +20,7 @@
         padding: 0;
         font-family: 'Nunito', sans-serif;
         font-weight: 700;
-        background: linear-gradient(rgba(255, 192, 203, 0.7), rgba(255, 182, 193, 0.7)),
-          url('https://images.unsplash.com/photo-1607746882042-944635dfe10e') no-repeat center center fixed;
+        background: url('https://i.imgur.com/0Uyht9d.png') no-repeat center center fixed;
         background-size: cover;
         color: white;
         display: flex;
@@ -62,7 +61,7 @@
 
       .card {
         display: none;
-        position: absolute;
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -73,6 +72,8 @@
         width: 80%;
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         animation: cardAnimation 0.8s ease-out;
+        z-index: 3;
+        overflow: hidden;
       }
 
       @keyframes cardAnimation {
@@ -126,6 +127,21 @@
       #playButton:hover {
         background-color: #ff63a1;
       }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .close-btn:hover {
+        color: red;
+      }
     </style>
   </head>
   <body>
@@ -159,6 +175,7 @@
     <div class="heart" onclick="showCard()">❤️</div>
 
     <div id="card" class="card">
+      <button class="close-btn" onclick="closeCard()">X</button>
       <img src="https://i.imgur.com/LKJn5eo.jpeg" alt="Manu" />
       <p>
         Minha princesa, você é a razão do meu sorriso. Seu jeito único, sua risada contagiante e o carinho que você me dá são os maiores presentes que eu já poderia receber. Você é minha paz, minha felicidade. Eu te amo com todo o meu coração! 💖
@@ -173,6 +190,10 @@
         startFallingHearts();
       }
 
+      function closeCard() {
+        document.getElementById("card").style.display = "none";
+      }
+
       function startFallingHearts() {
         setInterval(() => {
           const heart = document.createElement("div");
@@ -185,7 +206,7 @@
       }
 
       function playMusic() {
-        const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); // Substitua pelo link correto para "I Wanna Be Yours"
+        const audio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"); // Substitua pelo link correto para "I Wanna Be Yours"
         audio.play();
       }
     </script>
