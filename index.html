@@ -11,16 +11,12 @@
       rel="stylesheet"
     />
     <style>
-      html {
-        scroll-behavior: smooth;
-      }
-
       body {
         margin: 0;
         padding: 0;
         font-family: 'Nunito', sans-serif;
         font-weight: 700;
-        background: url('https://i.imgur.com/0Uyht9d.png') no-repeat center center fixed;
+        background: url('https://i.imgur.com/kIR6VjC.jpg') no-repeat center center fixed;
         background-size: cover;
         color: white;
         display: flex;
@@ -52,95 +48,67 @@
         cursor: pointer;
         transition: transform 0.3s;
         margin-top: 40px;
-        z-index: 2;
       }
 
       .heart:hover {
         transform: scale(1.2);
       }
 
-      .card {
+      #music {
         display: none;
+        margin-top: 30px;
+      }
+
+      .play-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #ff1493;
+        color: white;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      .play-button:hover {
+        background-color: #ff69b4;
+      }
+
+      .card {
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 20px;
-        border-radius: 10px;
-        max-width: 400px;
-        width: 80%;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        animation: cardAnimation 0.8s ease-out;
-        z-index: 3;
-        overflow: hidden;
-      }
-
-      @keyframes cardAnimation {
-        0% {
-          transform: translate(-50%, -50%) scale(0);
-        }
-        100% {
-          transform: translate(-50%, -50%) scale(1);
-        }
+        background: #fff;
+        color: black;
+        border-radius: 12px;
+        padding: 30px;
+        display: none;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        z-index: 999;
+        text-align: center;
       }
 
       .card img {
-        width: 100%;
-        border-radius: 10px;
-        margin-bottom: 20px;
-      }
-
-      .card p {
-        font-size: 1.1rem;
-        color: #333;
-        line-height: 1.6;
-      }
-
-      .falling-heart {
-        position: absolute;
-        top: -50px;
-        color: pink;
-        font-size: 24px;
-        animation: fall 5s linear infinite;
-      }
-
-      @keyframes fall {
-        to {
-          transform: translateY(100vh);
-        }
-      }
-
-      #playButton {
-        display: none;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: pink;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      #playButton:hover {
-        background-color: #ff63a1;
+        width: 150px;
+        border-radius: 50%;
       }
 
       .close-btn {
         position: absolute;
         top: 10px;
         right: 10px;
-        font-size: 1.5rem;
-        background: none;
+        background: #ff1493;
+        color: white;
         border: none;
-        color: #333;
+        font-size: 1.2rem;
         cursor: pointer;
+        border-radius: 50%;
+        padding: 5px 10px;
       }
 
       .close-btn:hover {
-        color: red;
+        background: #ff69b4;
       }
     </style>
   </head>
@@ -176,38 +144,30 @@
 
     <div id="card" class="card">
       <button class="close-btn" onclick="closeCard()">X</button>
-      <img src="https://i.imgur.com/LKJn5eo.jpeg" alt="Manu" />
+      <img src="https://i.imgur.com/LKJn5eo.jpeg" alt="Foto da Princesa" />
       <p>
-        Minha princesa, você é a razão do meu sorriso. Seu jeito único, sua risada contagiante e o carinho que você me dá são os maiores presentes que eu já poderia receber. Você é minha paz, minha felicidade. Eu te amo com todo o meu coração! 💖
+        Princesa, você é a melhor parte de mim. Cada momento ao seu lado me faz mais feliz. Eu te amo com todo o meu coração!
       </p>
-      <p>Essa eu dedico pra vc mnh princesa 💖</p>
-      <button id="playButton" onclick="playMusic()">Play</button>
+      <p>Essa eu dedico pra você, minha princesa!</p>
+      <iframe
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/5XeFesFbtLpXzIVDNQP22n?utm_source=generator&theme=0"
+        width="100%"
+        height="152"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
     </div>
 
     <script>
       function showCard() {
         document.getElementById("card").style.display = "block";
-        startFallingHearts();
       }
 
       function closeCard() {
         document.getElementById("card").style.display = "none";
-      }
-
-      function startFallingHearts() {
-        setInterval(() => {
-          const heart = document.createElement("div");
-          heart.className = "falling-heart";
-          heart.style.left = Math.random() * window.innerWidth + "px";
-          heart.innerText = "💖";
-          document.body.appendChild(heart);
-          setTimeout(() => heart.remove(), 5000);
-        }, 300);
-      }
-
-      function playMusic() {
-        const audio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"); // Substitua pelo link correto para "I Wanna Be Yours"
-        audio.play();
       }
     </script>
   </body>
