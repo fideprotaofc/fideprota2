@@ -95,6 +95,37 @@
         color: #333;
         line-height: 1.6;
       }
+
+      .falling-heart {
+        position: absolute;
+        top: -50px;
+        color: pink;
+        font-size: 24px;
+        animation: fall 5s linear infinite;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+        }
+      }
+
+      #playButton {
+        display: none;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: pink;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #playButton:hover {
+        background-color: #ff63a1;
+      }
     </style>
   </head>
   <body>
@@ -132,11 +163,30 @@
       <p>
         Minha princesa, você é a razão do meu sorriso. Seu jeito único, sua risada contagiante e o carinho que você me dá são os maiores presentes que eu já poderia receber. Você é minha paz, minha felicidade. Eu te amo com todo o meu coração! 💖
       </p>
+      <p>Essa eu dedico pra vc mnh princesa 💖</p>
+      <button id="playButton" onclick="playMusic()">Play</button>
     </div>
 
     <script>
       function showCard() {
         document.getElementById("card").style.display = "block";
+        startFallingHearts();
+      }
+
+      function startFallingHearts() {
+        setInterval(() => {
+          const heart = document.createElement("div");
+          heart.className = "falling-heart";
+          heart.style.left = Math.random() * window.innerWidth + "px";
+          heart.innerText = "💖";
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 5000);
+        }, 300);
+      }
+
+      function playMusic() {
+        const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); // Substitua pelo link correto para "I Wanna Be Yours"
+        audio.play();
       }
     </script>
   </body>
