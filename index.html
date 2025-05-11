@@ -2,214 +2,427 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Manu, meu amor por você é infinito ♥</title>
+  <title>Surpresa para Manuelly</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <style>
     body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffe1e8 0%, #f9c5d1 50%, #f7a1b7 100%);
+      font-family: 'Quicksand', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #fbc7d4, #b3d4fc);
       min-height: 100vh;
       margin: 0;
-      overflow-x: hidden;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
     }
-    main {
-      background: rgba(255 255 255 / 0.95);
-      border-radius: 2rem;
-      box-shadow: 0 20px 40px rgb(219 39 119 / 0.3);
-      max-width: 48rem;
-      width: 100%;
-      padding: 3rem 3.5rem;
-      text-align: center;
-      position: relative;
-      z-index: 10;
+    button {
+      transition: all 0.3s ease;
     }
-    h1 {
-      font-weight: 800;
-      font-size: 3.5rem;
-      color: #be185d;
-      margin-bottom: 2.5rem;
-      user-select: none;
-      line-height: 1.1;
-    }
-    .heart {
-      color: #e11d48;
-      display: inline-block;
-      animation: heartbeat 1.5s infinite;
-      transform-origin: center;
-      margin-left: 0.3rem;
-    }
-    @keyframes heartbeat {
-      0%, 100% {
-        transform: scale(1);
-      }
-      25% {
-        transform: scale(1.3);
-      }
-      50% {
-        transform: scale(1);
-      }
-      75% {
-        transform: scale(1.15);
-      }
-    }
-    p {
-      font-size: 1.125rem;
-      color: #831843;
-      line-height: 1.7;
-      white-space: pre-line;
-      font-weight: 600;
-      margin-bottom: 3rem;
-      user-select: text;
-    }
-    .btn-container {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    a.button {
-      position: relative;
-      display: inline-block;
-      padding: 1rem 3rem;
-      border-radius: 9999px;
-      border: 2px solid #f9a8d4;
-      background: linear-gradient(135deg, #fbcfe8 0%, #f9a8d4 100%);
-      color: #831843;
-      font-weight: 700;
-      font-size: 1.125rem;
-      text-decoration: none;
-      box-shadow: 0 8px 15px rgb(219 39 119 / 0.3);
-      transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        background-color 0.3s ease,
-        color 0.3s ease;
-      user-select: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    a.button::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 9999px;
-      background: #db2777;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
-    }
-    a.button:hover,
-    a.button:focus-visible {
-      color: white;
+    button:hover:not(:disabled) {
       transform: scale(1.05);
-      box-shadow: 0 12px 25px rgb(219 39 119 / 0.6);
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.5);
     }
-    a.button:hover::before,
-    a.button:focus-visible::before {
-      opacity: 1;
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      transform: none !important;
+      box-shadow: none !important;
     }
-    a.button:focus-visible {
-      outline-offset: 4px;
-      outline: 3px solid #f9a8d4;
+    /* Scrollbar for quiz form if needed */
+    #quizForm {
+      max-height: 80vh;
+      overflow-y: auto;
     }
-    footer {
-      margin-top: 4rem;
-      font-weight: 300;
-      font-size: 0.875rem;
-      color: #be185d;
-      user-select: text;
+    /* Custom scrollbar */
+    #quizForm::-webkit-scrollbar {
+      width: 8px;
     }
-    footer i {
-      color: #e11d48;
-      margin-left: 0.25rem;
+    #quizForm::-webkit-scrollbar-track {
+      background: #fbc7d4;
+      border-radius: 10px;
     }
-    /* Hearts falling animation */
-    .heart-fall {
-      position: fixed;
-      top: -50px;
-      width: 24px;
-      height: 24px;
-      pointer-events: none;
-      user-select: none;
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      will-change: transform, opacity;
-      z-index: 5;
-      color: #e11d48;
-      filter: drop-shadow(0 0 2px #be185d);
-    }
-    @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-      }
+    #quizForm::-webkit-scrollbar-thumb {
+      background: #ec4899;
+      border-radius: 10px;
     }
   </style>
 </head>
-<body>
-
-    <div class="btn-container">
-      <a href="iloveyou.html" class="button" aria-label="Eu te amoo 1M vezes">
-        Eu te amoo 1M vezes
-      </a>
-      <a href="http://ilavayou.com.br/visualizar_rosa/41c6717b-6394-4c61-9e13-4d61dc8c9c03" target="_blank" rel="noopener noreferrer" class="button" aria-label="A flor do nosso amor">
-        A flor do nosso amor
-      </a>
-      <a href="musica.html" class="button" aria-label="Músicas">
-        músicas
-      </a>
+<body class="flex flex-col items-center justify-center min-h-screen px-6 py-12">
+  <main class="max-w-3xl w-full text-center p-10 bg-white/90 rounded-3xl shadow-2xl border border-pink-300">
+    <h1 class="text-4xl sm:text-5xl font-extrabold mb-12 text-gradient bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent select-none">
+      Oi, Manu ♥<br />Tem uma surpresinha aqui pra você :)
+    </h1>
+    <div class="flex flex-col sm:flex-row justify-center gap-8 mb-12">
+      <button id="btnSenha" aria-label="Entrar com senha" class="relative inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-semibold shadow-lg hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-pink-400 focus:ring-opacity-50">
+        <i class="fas fa-lock mr-3 text-lg"></i> Entrar com senha
+      </button>
+      <button id="btnDescobrir" aria-label="Descobrir senha" class="relative inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-cyan-600 text-white font-semibold shadow-lg hover:from-blue-600 hover:to-cyan-700 focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-50">
+        <i class="fas fa-question-circle mr-3 text-lg"></i> Descobrir senha
+      </button>
     </div>
-    <footer>
-      Feito com <i class="fas fa-heart" aria-hidden="true"></i> e muito carinho para a Manu.
-    </footer>
+
+    <form id="quizForm" class="hidden bg-gradient-to-tr from-pink-50 to-purple-50 rounded-3xl p-8 shadow-xl border border-pink-300 max-h-[75vh] overflow-y-auto" novalidate>
+      <h2 class="text-2xl font-bold mb-8 text-pink-700 select-none">Quiz para descobrir a senha</h2>
+
+      <fieldset class="mb-8">
+        <legend class="font-semibold text-lg mb-4 text-pink-800 select-none">Qual o seu nome?</legend>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="nome" value="Manuelly" required class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Manuelly</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="nome" value="Emanuelly" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Emanuelly</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="nome" value="Juliete" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Juliete</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="nome" value="Carlão kkkkkkk" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Carlão kkkkkkk</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="mb-8">
+        <legend class="font-semibold text-lg mb-4 text-pink-800 select-none">Em que ano você nasceu?</legend>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="ano" value="2011" required class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">2011</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="ano" value="2005" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">2005</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="ano" value="2010" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">2010</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="ano" value="2014" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">2014</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="mb-8">
+        <legend class="font-semibold text-lg mb-4 text-pink-800 select-none">Quantos anos eu tenho?</legend>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="idade" value="14" required class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">14</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="idade" value="16" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">16</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="idade" value="12" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">12</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="idade" value="18" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">18</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="mb-8">
+        <legend class="font-semibold text-lg mb-4 text-pink-800 select-none">Qual meu carro preferido?</legend>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="carro" value="Bugatti" required class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Bugatti</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="carro" value="BMW" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">BMW</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="carro" value="Uno com escada" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Uno com escada</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="carro" value="Ferrari" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Ferrari</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="mb-8">
+        <legend class="font-semibold text-lg mb-4 text-pink-800 select-none">Qual meu cantor favorito?</legend>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="cantor" value="XXXTENTACION" required class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">XXXTENTACION</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="cantor" value="Matuê" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Matuê</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="cantor" value="Teto" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Teto</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="cantor" value="Mc Lan" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Mc Lan</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="mb-8">
+        <legend class="font-semibold text-lg mb-4 text-pink-800 select-none">Há quanto tempo a gente se conhece?</legend>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="tempo" value="6 meses" required class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">6 meses</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="tempo" value="1 ano" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">1 ano</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="tempo" value="3 semanas" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">3 semanas</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="tempo" value="Desde sempre" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">Desde sempre</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="mb-8">
+        <legend class="font-semibold text-lg mb-4 text-pink-800 select-none">Que dia a gente se conheceu?</legend>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="dia" value="62" required class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">62</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="dia" value="13" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">13</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="dia" value="7" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">7</span>
+        </label>
+        <label class="flex items-center gap-4 cursor-pointer group">
+          <input type="radio" name="dia" value="100" class="accent-pink-500 w-5 h-5 transition duration-300 group-hover:scale-110" />
+          <span class="text-pink-700 text-lg select-none">100</span>
+        </label>
+      </fieldset>
+
+      <div class="text-center">
+        <button type="submit" class="relative inline-flex items-center justify-center px-10 py-4 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold shadow-lg hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-pink-400 focus:ring-opacity-60 transition-transform duration-300 hover:scale-105">
+          <i class="fas fa-paper-plane mr-3 text-lg"></i> Enviar respostas
+        </button>
+      </div>
+    </form>
   </main>
 
+  <!-- Modal Overlay -->
+  <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div id="modalContent" class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl relative">
+      <button id="modalCloseBtn" aria-label="Fechar modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors text-2xl font-bold focus:outline-none">&times;</button>
+      <div id="modalBody" class="text-center"></div>
+      <div id="modalActions" class="mt-8 flex justify-center gap-6 flex-wrap"></div>
+    </div>
+  </div>
+
   <script>
-    // Create falling hearts effect
-    const heartSVG = `
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" >
-        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-    `;
+    const btnSenha = document.getElementById('btnSenha');
+    const btnDescobrir = document.getElementById('btnDescobrir');
+    const quizForm = document.getElementById('quizForm');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalContent = document.getElementById('modalContent');
+    const modalBody = document.getElementById('modalBody');
+    const modalActions = document.getElementById('modalActions');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart-fall");
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
-      heart.style.fontSize = (12 + Math.random() * 18) + "px";
-      heart.style.opacity = 0.7 + Math.random() * 0.3;
-      heart.innerHTML = heartSVG;
-      document.body.appendChild(heart);
+    // Show modal function
+    function showModal({ title = '', content = '', buttons = [] }) {
+      modalBody.innerHTML = '';
+      modalActions.innerHTML = '';
 
-      // Remove heart after animation
-      heart.addEventListener("animationend", () => {
-        heart.remove();
+      if (title) {
+        const h2 = document.createElement('h2');
+        h2.className = 'text-2xl font-extrabold mb-6 text-pink-600';
+        h2.textContent = title;
+        modalBody.appendChild(h2);
+      }
+
+      if (typeof content === 'string') {
+        const p = document.createElement('p');
+        p.className = 'text-gray-700 text-lg';
+        p.innerHTML = content;
+        modalBody.appendChild(p);
+      } else if (content instanceof HTMLElement) {
+        modalBody.appendChild(content);
+      }
+
+      buttons.forEach(btn => {
+        const button = document.createElement('button');
+        button.type = btn.type || 'button';
+        button.textContent = btn.text;
+        button.className = btn.className || 'px-6 py-3 rounded-full font-semibold shadow-md transition-colors focus:outline-none focus:ring-4 whitespace-nowrap';
+        if (btn.color === 'primary') {
+          button.classList.add('bg-pink-500', 'text-white', 'hover:bg-pink-600', 'focus:ring-pink-400');
+        } else if (btn.color === 'secondary') {
+          button.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300', 'focus:ring-gray-300');
+        }
+        if (btn.onClick) {
+          button.addEventListener('click', btn.onClick);
+        }
+        modalActions.appendChild(button);
       });
+
+      modalOverlay.classList.remove('hidden');
+      // Focus first button for accessibility
+      if (modalActions.firstChild) modalActions.firstChild.focus();
     }
 
-    // Create hearts continuously
-    setInterval(() => {
-      createHeart();
-    }, 300);
+    function closeModal() {
+      modalOverlay.classList.add('hidden');
+      modalBody.innerHTML = '';
+      modalActions.innerHTML = '';
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+
+    // Entrar com senha button click
+    btnSenha.addEventListener('click', () => {
+      // Create input element
+      const inputSenha = document.createElement('input');
+      inputSenha.type = 'password';
+      inputSenha.placeholder = 'Digite a senha';
+      inputSenha.className = 'w-full px-4 py-3 rounded-lg border border-pink-300 focus:outline-none focus:ring-4 focus:ring-pink-400 focus:ring-opacity-50 text-lg text-center font-semibold';
+      inputSenha.autocomplete = 'off';
+      inputSenha.spellcheck = false;
+      inputSenha.setAttribute('aria-label', 'Campo para digitar a senha');
+
+      showModal({
+        title: 'Entrar com senha',
+        content: inputSenha,
+        buttons: [
+          {
+            text: 'Cancelar',
+            color: 'secondary',
+            onClick: () => {
+              closeModal();
+              btnSenha.focus();
+            }
+          },
+          {
+            text: 'Entrar',
+            color: 'primary',
+            onClick: () => {
+              const senha = inputSenha.value.trim();
+              if (senha === 'manuzinhalindaah123@') {
+                closeModal();
+                window.location.href = 'principal.html';
+              } else {
+                inputSenha.classList.add('border-red-500');
+                inputSenha.focus();
+                alert('Senha incorreta! Tente novamente.');
+              }
+            }
+          }
+        ]
+      });
+
+      // Focus input after modal shown
+      setTimeout(() => inputSenha.focus(), 100);
+    });
+
+    // Descobrir senha button click
+    btnDescobrir.addEventListener('click', () => {
+      quizForm.classList.remove('hidden');
+      btnSenha.disabled = true;
+      btnDescobrir.disabled = true;
+      btnSenha.classList.add('opacity-50', 'cursor-not-allowed');
+      btnDescobrir.classList.add('opacity-50', 'cursor-not-allowed');
+      quizForm.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    quizForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const respostasCorretas = {
+        nome: 'Manuelly',
+        ano: '2011',
+        idade: '14',
+        carro: 'Bugatti',
+        cantor: 'XXXTENTACION',
+        tempo: '6 meses',
+        dia: '62'
+      };
+
+      const formData = new FormData(quizForm);
+      let todasCorretas = true;
+
+      for (const [pergunta, respostaCorreta] of Object.entries(respostasCorretas)) {
+        if (formData.get(pergunta) !== respostaCorreta) {
+          todasCorretas = false;
+          break;
+        }
+      }
+
+      if (todasCorretas) {
+        const senhaTexto = 'manuzinhalindaah123@';
+
+        const senhaP = document.createElement('p');
+        senhaP.className = 'mt-2 text-2xl font-extrabold text-pink-600 select-all';
+        senhaP.textContent = senhaTexto;
+
+        showModal({
+          title: 'Parabéns!!',
+          content: (() => {
+            const container = document.createElement('div');
+            const p1 = document.createElement('p');
+            p1.className = 'text-pink-700 font-semibold text-xl';
+            p1.textContent = 'Sua senha é:';
+            container.appendChild(p1);
+            container.appendChild(senhaP);
+            return container;
+          })(),
+          buttons: [
+            {
+              text: 'Copiar senha',
+              color: 'primary',
+              onClick: () => {
+                navigator.clipboard.writeText(senhaTexto).then(() => {
+                  alert('Senha copiada para a área de transferência!');
+                }).catch(() => {
+                  alert('Não foi possível copiar a senha. Por favor, copie manualmente.');
+                });
+              }
+            },
+            {
+              text: 'Voltar para a tela inicial',
+              color: 'secondary',
+              onClick: () => {
+                closeModal();
+                quizForm.reset();
+                quizForm.classList.add('hidden');
+                btnSenha.disabled = false;
+                btnDescobrir.disabled = false;
+                btnSenha.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnDescobrir.classList.remove('opacity-50', 'cursor-not-allowed');
+                btnSenha.focus();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }
+          ]
+        });
+      } else {
+        showModal({
+          title: 'Ops!',
+          content: `<p class="text-red-600 font-semibold text-lg">Alguma resposta está errada. Tente novamente!</p>`,
+          buttons: [
+            {
+              text: 'Tentar de novo',
+              color: 'primary',
+              onClick: () => {
+                closeModal();
+              }
+            }
+          ]
+        });
+      }
+    });
   </script>
 </body>
 </html>
