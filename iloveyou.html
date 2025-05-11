@@ -1,0 +1,186 @@
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>iloveyou.html</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet" />
+<style>
+  body {
+    font-family: 'Quicksand', 'Segoe UI', sans-serif;
+    background: linear-gradient(180deg, #ffe4ec 0%, #ffffff 100%);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+  /* Hearts falling */
+  .heart {
+    position: fixed;
+    top: -2rem;
+    color: #ec4899;
+    user-select: none;
+    pointer-events: none;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fall {
+    0% {
+      transform: translateY(-2rem) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  /* Scrollbar styling for the scrollable container */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #fce7f3;
+    border-radius: 9999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #ec4899;
+    border-radius: 9999px;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #ec4899 #fce7f3;
+  }
+</style>
+</head>
+<body class="flex flex-col items-center justify-start min-h-screen p-4">
+
+  <h1 class="text-4xl md:text-5xl font-semibold text-pink-600 mb-6 select-none">💖 Manu, eu te amoooo mil milhões 💖</h1>
+
+  <form id="searchForm" class="flex w-full max-w-md mb-6" autocomplete="off" aria-label="Pesquisar frase">
+    <input 
+      id="searchInput" 
+      type="number" 
+      min="0" max="1000000" 
+      placeholder="Digite um número de 0 a 1.000.000" 
+      class="flex-grow rounded-l-full border-2 border-pink-400 focus:border-pink-600 focus:ring-2 focus:ring-pink-300 px-4 py-2 text-lg outline-none" 
+      aria-label="Número da frase para buscar"
+      required
+    />
+    <button 
+      type="submit" 
+      class="bg-pink-500 hover:bg-pink-600 active:bg-pink-700 text-white rounded-r-full px-6 py-2 text-lg font-semibold transition-colors flex items-center justify-center"
+      aria-label="Ir para frase"
+    >
+      Ir
+      <i class="fas fa-arrow-right ml-2"></i>
+    </button>
+  </form>
+
+  <div id="container" tabindex="0" aria-live="polite" aria-atomic="false" class="w-full max-w-4xl h-[480px] md:h-[600px] border-2 border-pink-300 rounded-xl overflow-y-scroll scrollbar-thin bg-white shadow-lg px-4 py-3 text-center text-pink-700 text-lg md:text-xl font-medium select-text">
+    <!-- Frases serão inseridas aqui dinamicamente -->
+  </div>
+
+<script>
+  (() => {
+    const container = document.getElementById('container');
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('searchInput');
+
+    const totalMessages = 1000001; // 0 to 1,000,000 inclusive
+    const batchSize = 2000; // Number of messages per batch to render
+    let renderedCount = 0;
+
+    // Create a DocumentFragment to batch DOM insertions
+    function createMessageElement(index) {
+      const div = document.createElement('div');
+      div.id = `msg-${index}`;
+      div.textContent = `Manu, eu te amooo muitooo mnh gstsaaa ${index}`;
+      div.className = "py-0.5";
+      return div;
+    }
+
+    function renderBatch() {
+      if (renderedCount >= totalMessages) return;
+      const fragment = document.createDocumentFragment();
+      const end = Math.min(renderedCount + batchSize, totalMessages);
+      for (let i = renderedCount; i < end; i++) {
+        fragment.appendChild(createMessageElement(i));
+      }
+      container.appendChild(fragment);
+      renderedCount = end;
+      // Schedule next batch
+      if (renderedCount < totalMessages) {
+        setTimeout(renderBatch, 20);
+      }
+    }
+
+    // Start rendering batches
+    renderBatch();
+
+    // Scroll to message by index
+    function scrollToMessage(index) {
+      if (index < 0 || index >= totalMessages) {
+        alert('Por favor, digite um número entre 0 e 1.000.000.');
+        return;
+      }
+      const el = document.getElementById(`msg-${index}`);
+      if (el) {
+        // Smooth scroll inside container
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Highlight briefly
+        el.classList.add('bg-pink-200', 'rounded-md', 'transition-colors');
+        setTimeout(() => {
+          el.classList.remove('bg-pink-200', 'rounded-md');
+        }, 2000);
+      } else {
+        // If element not rendered yet, scroll approx and wait for render
+        // Approximate scrollTop: height per item * index
+        // We don't know exact height, so scroll to bottom or top accordingly
+        // Let's scroll to bottom if index > renderedCount, else top
+        if (index > renderedCount) {
+          container.scrollTop = container.scrollHeight;
+        } else {
+          container.scrollTop = 0;
+        }
+        alert('Aguarde um momento enquanto a frase é carregada.');
+      }
+    }
+
+    searchForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const val = Number(searchInput.value);
+      if (Number.isNaN(val) || val < 0 || val > 1000000) {
+        alert('Por favor, digite um número válido entre 0 e 1.000.000.');
+        return;
+      }
+      scrollToMessage(val);
+    });
+
+    // Hearts falling animation
+    const heartsCount = 40;
+    const hearts = [];
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${Math.random() * 100}vw`;
+      const size = 10 + Math.random() * 20;
+      heart.style.fontSize = `${size}px`;
+      heart.style.opacity = (0.3 + Math.random() * 0.7).toFixed(2);
+      heart.style.animationDuration = `${5 + Math.random() * 7}s`;
+      heart.style.animationDelay = `${Math.random() * 10}s`;
+      heart.textContent = '♥';
+      document.body.appendChild(heart);
+      return heart;
+    }
+
+    for (let i = 0; i < heartsCount; i++) {
+      hearts.push(createHeart());
+    }
+
+  })();
+</script>
+
+</body>
+</html>
