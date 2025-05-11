@@ -1,187 +1,231 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pra Minha Princesa</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Nunito', sans-serif;
-        font-weight: 700;
-        background: url('https://i.pinimg.com/736x/86/74/16/867416c7cfc02827c346266ab2c0f431.jpg') no-repeat center center fixed;
-        background-size: cover;
-        color: #f1f1f1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: start;
-        min-height: 100vh;
-        padding: 40px 20px;
-        text-align: center;
-        position: relative;
-        overflow-x: hidden;
-        z-index: 0;
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manu, meu amor por você é infinito ♥</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffe1e8 0%, #f9c5d1 50%, #f7a1b7 100%);
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    main {
+      background: rgba(255 255 255 / 0.95);
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px rgb(219 39 119 / 0.3);
+      max-width: 48rem;
+      width: 100%;
+      padding: 3rem 3.5rem;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+    h1 {
+      font-weight: 800;
+      font-size: 3.5rem;
+      color: #be185d;
+      margin-bottom: 2.5rem;
+      user-select: none;
+      line-height: 1.1;
+    }
+    .heart {
+      color: #e11d48;
+      display: inline-block;
+      animation: heartbeat 1.5s infinite;
+      transform-origin: center;
+      margin-left: 0.3rem;
+    }
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
       }
-
-      .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        display: none;
-        z-index: 998;
+      25% {
+        transform: scale(1.3);
       }
-
-      h1 {
-        font-family: 'Great Vibes', cursive;
-        font-size: 3rem;
-        margin-bottom: 20px;
-        text-shadow: 1px 1px 5px black;
+      50% {
+        transform: scale(1);
       }
-
-      p {
-        font-size: 1.2rem;
-        line-height: 1.8;
-        max-width: 800px;
-        margin-bottom: 20px;
-        text-shadow: 1px 1px 3px black;
+      75% {
+        transform: scale(1.15);
       }
-
-      .heart {
-        font-size: 4rem;
-        cursor: pointer;
-        transition: transform 0.3s;
-        margin-top: 40px;
-        z-index: 2;
+    }
+    p {
+      font-size: 1.125rem;
+      color: #831843;
+      line-height: 1.7;
+      white-space: pre-line;
+      font-weight: 600;
+      margin-bottom: 3rem;
+      user-select: text;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    a.button {
+      position: relative;
+      display: inline-block;
+      padding: 1rem 3rem;
+      border-radius: 9999px;
+      border: 2px solid #f9a8d4;
+      background: linear-gradient(135deg, #fbcfe8 0%, #f9a8d4 100%);
+      color: #831843;
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-decoration: none;
+      box-shadow: 0 8px 15px rgb(219 39 119 / 0.3);
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease,
+        color 0.3s ease;
+      user-select: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    a.button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      background: #db2777;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+    a.button:hover,
+    a.button:focus-visible {
+      color: white;
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgb(219 39 119 / 0.6);
+    }
+    a.button:hover::before,
+    a.button:focus-visible::before {
+      opacity: 1;
+    }
+    a.button:focus-visible {
+      outline-offset: 4px;
+      outline: 3px solid #f9a8d4;
+    }
+    footer {
+      margin-top: 4rem;
+      font-weight: 300;
+      font-size: 0.875rem;
+      color: #be185d;
+      user-select: text;
+    }
+    footer i {
+      color: #e11d48;
+      margin-left: 0.25rem;
+    }
+    /* Hearts falling animation */
+    .heart-fall {
+      position: fixed;
+      top: -50px;
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+      user-select: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      will-change: transform, opacity;
+      z-index: 5;
+      color: #e11d48;
+      filter: drop-shadow(0 0 2px #be185d);
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
       }
-
-      .heart:hover {
-        transform: scale(1.2);
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
       }
+    }
+  </style>
+</head>
+<body>
+  <main role="main" aria-label="Mensagem romântica para Manu">
+    <h1>
+      Manu, meu amor por você é infinito
+      <span aria-hidden="true" class="heart">♥</span>
+    </h1>
+    <p>
+      Manu,
 
-      .card {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(255, 255, 255, 0.9);
-        color: black;
-        border-radius: 12px;
-        padding: 30px;
-        display: none;
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-        z-index: 999;
-        text-align: center;
-        width: 80%;
-        max-width: 600px;
-        background-image: url('https://i.imgur.com/LKJn5eo.jpeg');
-        background-size: cover;
-        background-position: center;
-      }
+      Eu sei que às vezes palavras não são suficientes, mas mesmo assim eu quero tentar.
+      Você é meu porto seguro, minha calmaria no meio do caos, meu sorriso em dias cinzentos.
+      Cada "eu te amo" que eu escrevi até agora não é exagero — é só a verdade sendo repetida de mil formas diferentes.
 
-      .card p {
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 20px;
-        border-radius: 10px;
-        color: white;
-        font-size: 1.1rem;
-        line-height: 1.6;
-      }
+      Te amo pelo que você é, pelo que me faz ser, e por tudo que ainda vamos viver juntos.
 
-      .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: #ff1493;
-        color: white;
-        border: none;
-        font-size: 1.2rem;
-        cursor: pointer;
-        border-radius: 50%;
-        padding: 5px 10px;
-      }
-
-      .close-btn:hover {
-        background: #ff69b4;
-      }
-
-      .spotify-frame {
-        margin-top: 100px; /* Posicionamento ajustado */
-      }
-    </style>
-  </head>
-  <body>
-    <div class="overlay" id="overlay"></div>
-
-    <h1>Pra Minha Princesa 💖</h1>
-   <p>
-  Amanhã faz 6 meses que eu te conheço princesa, 6 meses parece pouco tempo quando a gente fala assim, mais p mim é tipo uma vida inteira, pq nesses 6 meses tu virou tanta coisa pra mim q nem dá pra explicar, vc virou minha rotina, meu primeiro pensamento do dia, meu motivo de de tentar ser alguém, vc é minha paz, e meu lugar favorito msm estando longe
-  <br /><br />
-  e tipo, eu fico pensando como o universo foi doido de ter colocado vc no meu caminho, logo vc com esse jeitinho todo seu com essa risada linda q vc tem, pqp q sorte eu tive quando eu te conheci
-  <br /><br />
-  vc chegou do nd, sem avisar, e foi ficando, foi tomando espaço foi ocupando cada cantinho de mim, foi virando prioridade, foi virando lar, e eu nunca pensei q alguém fosse mexer tanto comigo assim, e olha q a gente nem se viu ainda, MAIS MESMO ASSIM, vc é mais real q tudo, nunca amei alguem assim
-  <br /><br />
-  princesa, c nem imagina o qnt tu me faz bem, é bem loko, só de ver teu nome na notificação já muda meu humor
-  <br /><br />
-  e olha, eu sei q às vezes eu sou meio chato, falo besteira, te irrito sem querer, mais NUNCA duvide do meu amor por vc, pq eu te amo de verdade de um jeito q nem dá pra colocar em palavras, de um jeito q vai além de tudo, e eu odeio qnd c fica com raiva de mim, odeio qnd tu fica triste, quando vc responde seco, meu peito dói e eu fico mal, fico me culpando, fico pensando mil coisas tentando achar um jeito de fazer vc ficar normal dnv, pq tua felicidade é minha tmb, se tu tá mal eu fico mal junto, se tu tá bem meu mundo brilha
-  <br /><br />
-  vc é a minha princesa, e n é só pelo apelido, é pq tu merece ser tratada com carinho, com cuidado, com amor, com tudo de bom , tu é única Manu, única MESMO, e n existe ninguém igual a vc, vc tem uma luz própria, um jeito q só tu tem uma essência q me prendeu desde o primeiro dia, e é por isso q eu fico aqui firme do teu lado sonhando com o dia q a gente vai se ver pessoalmente se abraçar forte, tipo MUITO forte daqueles abraços q fazem a gente esquecer do mundo, e eu juro no dia q isso acontecer eu nunca mais vou soltar
-  <br /><br />
-  eu quero tudo contigo, cada fase, cada momento, cada problema, cada conquista, cada vitória, quero brigar por bobeira fazer as pazes com um “vem cá minha princesa”, quero te chamar de minha todos os dias, quero ouvir tua voz antes de dormir, quero fazer planos, sonhar junto e viver junto, e sim msm q a distância exista agora eu sei q um dia ela vai sumir, e aí vai ser só nós dois lado a lado vivendo aquilo q a gente tanto imagina
-  <br /><br />
-  obrigado por cada palavra, cada “eu te amo”, cada vez q c teve paciência cmg, cada vez q c me fez sorrir sem nem perceber, vc é o maior presente q eu já recebi na vida, e pode passar o tempo q for, pode vir o q vier, eu vou continuar te amando com o mesmo coração
-  <br /><br />
-  feliz 6 meses de nós princesa, feliz 6 meses do começo da melhor parte da minha vida , feliz 6 meses de uma grande história, e eu prometo, isso aqui só vai crescer pq a gente tem tudo pra ser pra sempre
-  <br /><br />
-  eu te amo mais do q qualquer palavra consegue mostrar, eu te amo num nível q assusta, mais no melhor sentido, eu te amo com tudo q eu sou, com tudo q eu tenho, com tudo q eu ainda quero ser só pra te fazer feliz
-  <br /><br />
-  e nunca nunca duvida disso, nunca esqueça do qnt vc é especial, nunca esqueça de nós, pq por mais q o mundo mude, por mais q tudo vire de cabeça pra baixo, eu vou continuar aqui com vc, por vc, por mim e por nós
-  <br /><br />
-  euuu teeee amooooo muitoooooo minhaaaaaaa princesaaaaa 💖💖💖
-</p>
-
-    <div class="heart" onclick="showCard()">❤️</div>
-
-    <div id="card" class="card">
-      <button class="close-btn" onclick="closeCard()">X</button>
-      <p>
-        Eu poderia passar hrs tentando encontrar as palavras certas pra te descrever, mais nenhuma chega perto do que vc realmente significa pra mim, Vc é minha menina, minha princesa, minha gostosa, Eu te amo mais do que consigo explicar.
-        <br /><br />
-        Essa eu dedico pra você, minha princesa! 💖
-      </p>
-      <iframe
-        class="spotify-frame"
-        style="border-radius:12px"
-        src="https://open.spotify.com/embed/track/1SOClUWhOi8vHZYMz3GluK?utm_source=generator&theme=0"
-        width="100%"
-        height="152"
-        frameborder="0"
-        allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-      ></iframe>
+      Com todo o meu amor,  
+      Seu eterno apaixonado.
+    </p>
+    <div class="btn-container">
+      <a href="iloveyou.html" class="button" aria-label="Eu te amoo 1M vezes">
+        Eu te amoo 1M vezes
+      </a>
+      <a href="http://ilavayou.com.br/visualizar_rosa/41c6717b-6394-4c61-9e13-4d61dc8c9c03" target="_blank" rel="noopener noreferrer" class="button" aria-label="A flor do nosso amor">
+        A flor do nosso amor
+      </a>
+      <a href="musica.html" class="button" aria-label="Músicas">
+        músicas
+      </a>
     </div>
+    <footer>
+      Feito com <i class="fas fa-heart" aria-hidden="true"></i> e muito carinho para a Manu.
+    </footer>
+  </main>
 
-    <script>
-      function showCard() {
-        document.getElementById("card").style.display = "block";
-        document.getElementById("overlay").style.display = "block";
-      }
+  <script>
+    // Create falling hearts effect
+    const heartSVG = `
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" >
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+    `;
 
-      function closeCard() {
-        document.getElementById("card").style.display = "none";
-        document.getElementById("overlay").style.display = "none";
-      }
-    </script>
-  </body>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart-fall");
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      heart.style.fontSize = (12 + Math.random() * 18) + "px";
+      heart.style.opacity = 0.7 + Math.random() * 0.3;
+      heart.innerHTML = heartSVG;
+      document.body.appendChild(heart);
+
+      // Remove heart after animation
+      heart.addEventListener("animationend", () => {
+        heart.remove();
+      });
+    }
+
+    // Create hearts continuously
+    setInterval(() => {
+      createHeart();
+    }, 300);
+  </script>
+</body>
 </html>
